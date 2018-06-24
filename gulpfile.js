@@ -35,13 +35,19 @@ let callback = async function () {
 
 gulp.task('first', callback);
 
-gulp.task('deploy', ['first'], () => {
-  cmd.image.build('with-gulp:latest', {
-      file: dockerPath
-    })
-    .then(() => cmd.run('docker run -p 8000:8000 with-gulp:latest'))
-})
+// gulp.task('deploy', ['first'], () => {
+  
+// })
 
-gulp.task('default', ['first', 'deploy'], function () {
-  console.log('This happened after deploy')
+gulp.task('default', ['first'], function () {
+  cmd.image.build('with-gulp:latest', {
+    file: dockerPath
+  })
+  .then(() => {
+    return cmd.run('docker run with-gulp:latest')
+  })
+  .then((stdout) => {
+    console.log(stdout.slice(0,-2));
+    console.log('This happened after deploy')
+  })
 });

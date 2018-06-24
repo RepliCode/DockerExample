@@ -12,15 +12,7 @@ var exec = require('child_process').exec, child;
 /// Working example of serving up console.logs from docker container code//////
 child = exec('node ./Container/exec.js',
     function (error, stdout, stderr) {
-        console.log('stdout: ' + stdout);
-
-        http.createServer(function(req,res){
-            res.write('Hey! ' + stdout);
-            res.end();
-            console.log('Running');
-        }).listen(8000);
-
-        console.log('stderr: ' + stderr);
+        console.log(stdout);
         if (error !== null) {
              console.log('exec error: ' + error);
         }
