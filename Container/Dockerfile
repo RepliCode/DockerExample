@@ -4,4 +4,4 @@ WORKDIR /app
 
 ADD . /app
 
-CMD ["node","./Container/server.js"]
+CMD ["node","./server.js"]
